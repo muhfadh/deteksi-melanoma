@@ -1,0 +1,101 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- page-title -->
+<section class="page-title centred" style="background-image: url(../static/main/images/background/page-title.jpg);">
+    <div class="container">
+        <div class="content-box" style="background-color: #003cff;">
+            <div class="title">Acral Melanoma Detection</div>
+            <ul class="bread-crumb">
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- page-title end -->
+
+<!-- form-section -->
+<section class="contact-section" style="padding-top:50px;" id="predict1">
+    <div class="container">
+        <div class="title-box centred">
+            <div class="sec-title">Upload an Image to Make a Prediction</div>
+        </div>
+        <!-- upload -->
+        <form class="login100-form validate-form" action="/predict-upload-compare" method=post enctype=multipart/form-data>
+            <!-- <div class="row" style=" width: 35%; margin: auto; padding: 15px;">
+                <select name="select_model" id="selected_model">
+                                <option value='hyperModel' >Hyperparameter Tuning Model  </option>
+                                <option value='LRSModel'   >Learning Rate Scheduler Model    </option>
+                                <option value='model-v3'   >Model V3     </option>
+                                <option value='model-v4'   >Model V4     </option>
+                        </select>
+            </div> -->
+            <div class="checkboxes">
+                <input type="checkbox" style="padding-right: 15px;" id="hyperModel" name="check_model" value="hyperModel" checked>Hyperparameter Tuning Model
+                <input type="checkbox" style="padding-right: 15px;" id="LRSModel" name="check_model" value="LRSModel">Learning Rate Scheduler Model
+                <input type="checkbox" style="padding-right: 15px;" id="model-v3" name="check_model" value="model-v3">Model V3
+                <input type="checkbox" style="padding-right: 15px;" id="model-v4" name="check_model" value="model-v4">Model V4
+                <input type="checkbox" style="padding-right: 15px;" id="vgg19" name="check_model" value="vgg19">VGG 19
+            </div>
+            <img id="image-preview" alt="image preview" src="#" style="width: 35%;" />
+            <div class="container-login100-form-btn">
+                <div class="wrap-input100 validate-input" data-validate="Image file is required" id="input">
+                    <input class="input100" id="image-source" name="file" onchange="previewImage();" type="file" alt="Input Image" accept="image/jpeg,image/jpg,image/png">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </span>
+                </div>
+            </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit">
+                        Execute
+                </button>
+            </div>
+        </form>
+
+        <!-- Sample -->
+        <section class="contact-section centred" style="padding-top: 40px; " id="predict2">
+            <div class="container">
+                <form action="/predict-sample-compare" method="post">
+                    <div class="checkboxes">
+                        <input type="checkbox" style="padding-right: 15px;" id="hyperModel" name="check_model_sample" value="hyperModel" checked>Hyperparameter Tuning Model
+                        <input type="checkbox" style="padding-right: 15px;" id="LRSModel" name="check_model_sample" value="LRSModel">Learning Rate Scheduler Model
+                        <input type="checkbox" style="padding-right: 15px;" id="model-v3" name="check_model_sample" value="model-v3">Model V3
+                        <input type="checkbox" style="padding-right: 15px;" id="model-v4" name="check_model_sample" value="model-v4">Model V4
+                        <input type="checkbox" style="padding-right: 15px;" id="vgg19" name="check_model_sample" value="vgg19">VGG 19
+                    </div>
+
+                    <table>
+                        <tr>
+                            {%for i in range(5) %}
+                            <td>
+                                <div class="row" style="padding-right: 25px;">
+                                    <div class="column">
+                                        <input type="hidden" name="input_image" id="count" value="{{list_img_path[i]}}" />
+                                        <input type="image" name="submit" onclick="change('{{list_img_path[i]}}')" style="height: 150px;width: 235px;padding-left: 10%;" src="{{list_img_path[i]}}" />
+                                    </div>
+                                </div>
+                            </td>
+                            {%endfor%}
+
+                            <tr>
+                                {%for i in range(35, 40) %}
+                                <td>
+                                    <div class="row" style="padding-right: 25px;">
+                                        <div class="column">
+                                            <input type="hidden" name="input_image" id="count" value="{{list_img_path[i]}}" />
+                                            <input type="image" name="submit" onclick="change('{{list_img_path[i]}}')" style="height: 150px;width: 235px;padding-left: 10%;" src="{{list_img_path[i]}}" />
+                                        </div>
+                                    </div>
+                                </td>
+                                {%endfor%}
+                            </tr>
+                    </table>
+                </form>
+            </div>
+        </section>
+        <!-- Sample -->
+    </div>
+</section>
+<!-- form-section end -->
+
+{% endblock %}

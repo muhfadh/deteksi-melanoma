@@ -1,0 +1,51 @@
+{% extends 'base2.html' %} {% block content %}
+
+<!-- page-title -->
+<section class="page-title centred" style="background-image: url(../static/main/images/background/page-title.jpg);">
+    <div class="container">
+        <div class="content-box" style="background-color: #003cff;">
+            <div class="title">Acral Melanoma Detection</div>
+            <ul class="bread-crumb">
+                <li>Run machine learning model in production</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- page-title end -->
+
+<!-- Table-section -->
+<section class="contact-section" id="result" style="padding-bottom: 50px;">
+    <div class="container">
+        <div class="title-box centred" style="padding-top: 5px; padding-bottom: 5px;">
+            <div class="sec-title">Prediction Result</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 content-column">
+                <div class="inner-content">
+                    <div class="contact-form-area">
+                        <!-- <p>{{pred}}</p>
+                        <p>{{labels}}</p>
+                        <p>{{probs}}</p>
+                        <p>{{model}}</p>
+                        <p>{{run_time}}</p> -->
+                        {%for i in range(len) %}
+                        <p style="margin: unset; padding: none; color: black; text-transform: capitalize; font-size: 25px; font-weight: bold;">{{ model[i] }} Model</p>
+                        <p style="margin: unset; padding: none; color: black; text-transform: capitalize; font-size: medium; font-weight: bold;"> Predicted Label is: {{ labels[i] }}</p>
+                        Angka prediksi (mendekati 0=acral melanoma dan mendekati 1=benign nevi) : {{ (probs[i]|max) }} | Waktu Prediksi : {{ (run_time[i]) }} detik
+                        <br>
+                        <hr> {%endfor%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 sidebar-column">
+                <div class="sidebar-content">
+                    <img src="{{ url_for('static', filename=img) }}" alt="" class="img-fluid" style="height:300px; width:300px;">
+                    <p style="font-size:25px;text-align:center;">Input Image</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- final-section end -->
+
+{% endblock %}
